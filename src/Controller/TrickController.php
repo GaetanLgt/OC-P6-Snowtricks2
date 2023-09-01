@@ -2,14 +2,17 @@
 
 namespace App\Controller;
 
+use App\Entity\User;
 use App\Entity\Trick;
 use App\Form\TrickType;
+use App\Entity\Commentaire;
+use App\Form\CommentaireType;
 use App\Repository\TrickRepository;
 use Doctrine\ORM\EntityManagerInterface;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 #[Route('/trick')]
 class TrickController extends AbstractController
@@ -43,10 +46,25 @@ class TrickController extends AbstractController
     }
 
     #[Route('/{id}', name: 'app_trick_show', methods: ['GET'])]
-    public function show(Trick $trick): Response
+    public function show(Trick $trick, EntityManagerInterface $entityManager): Response
     {
+        $commentaires = $trick->getCommentaires();
+
+        $commentaire = new Commentaire();
+        $form = $this->createForm(CommentaireType::class, $commentaire);
+        if ($form->isSubmitted() && $form->isValid()) {
+            $user = $entityManager->getRepository(User::class)->findOneBy(['id' => $this->getUser()->getId()]);
+            $commentaire->setTrick($trick);
+            $commentaire->setPublishedAt(new \DateTimeImmutable());
+            $commentaire->setImageProfilAuteur($user->getImageProfil());
+            $commentaire->setPseudoAuteur($user->getPseudo());
+            $entityManager->persist($commentaire);
+            $entityManager->flush();
+        }
         return $this->render('trick/show.html.twig', [
             'trick' => $trick,
+            'commentaires' => $commentaires,
+            'form' => $form->createView(),
         ]);
     }
 

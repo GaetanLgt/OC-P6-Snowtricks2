@@ -6,9 +6,13 @@
     {% for flash_error in app.flashes('verify_email_error') %}
         <div class="alert alert-danger" role="alert">{{ flash_error }}</div>
     {% endfor %}
-
-    <h1>Register</h1>
-
+    {% for flash_success in app.flashes('verify_email_success') %}
+        <div class="alert alert-success" role="alert">{{ flash_success }}</div>
+    {% endfor %}
+    <!-- mise en forme bootstrap de la page register -->
+    <div class="container">
+    
+    <h1>Inscription</h1>
     {{ form_errors(registrationForm) }}
 
     {{ form_start(registrationForm) }}
@@ -20,4 +24,6 @@
 
         <button type="submit" class="btn">Register</button>
     {{ form_end(registrationForm) }}
+    </div>
+
 {% endblock %}
