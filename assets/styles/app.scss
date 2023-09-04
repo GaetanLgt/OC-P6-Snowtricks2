@@ -1,1 +1,15 @@
 @import '~bootstrap/scss/bootstrap';
+
+#hero {
+    height: 90vh;
+    width: 100%;
+}
+
+.trick {
+    .card {
+        img {
+            height: 200px;
+            object-fit: cover;
+        }
+    }
+}
