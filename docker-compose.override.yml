@@ -12,3 +12,14 @@ services:
     image: schickling/mailcatcher
     ports: ["1025", "1080"]
 ###< symfony/mailer ###
+
+  adminer:
+    image: adminer:latest
+    container_name: "mycontainer_adminer"
+    depends_on:
+      - database
+    environment:
+      ADMINER_DESIGN: nette
+    ports:
+      - "8081:8080"
+    restart: always

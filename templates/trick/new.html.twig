@@ -3,9 +3,34 @@
 {% block title %}New Trick{% endblock %}
 
 {% block body %}
-    <h1>Create new Trick</h1>
+    <div class="container-fluid">
+        <div class="container">
+            <div class="row">
+             {% if error is defined and error %}
+    <div class="app-alert bg-danger" data-controller="alert--index" data-action="alert--index#close">
+        {{ error.messageKey|trans(error.messageData, 'security') }}
+    </div>
+{% endif %}
 
-    {{ include('trick/_form.html.twig') }}
+{% for label, messages in app.session.flashbag.all %}
+    {% for message in messages %}
+        <div class="p-3 app-alert bg-{{ label }}" data-controller="alert--index" data-action="alert--index#close">
+            {{ message }}
+        </div>
+    {% endfor %}
+{% endfor %}
+                <div class="card">
+                    <h1>Create new Trick</h1>
+                    {{ include('trick/_form.html.twig') }}
+                </div>
+                 <a href="{{ path('app_trick_index') }}">Retour à la liste</a>
+            </div>
+        
+        </div>
+    </div>
+    
 
-    <a href="{{ path('app_trick_index') }}">back to list</a>
+   
+
+   
 {% endblock %}

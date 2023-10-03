@@ -17,6 +17,7 @@ class CommentaireController extends AbstractController
     #[Route('/', name: 'app_commentaire_index', methods: ['GET'])]
     public function index(CommentaireRepository $commentaireRepository): Response
     {
+        
         return $this->render('commentaire/index.html.twig', [
             'commentaires' => $commentaireRepository->findAll(),
         ]);
@@ -28,7 +29,6 @@ class CommentaireController extends AbstractController
         $commentaire = new Commentaire();
         $form = $this->createForm(Commentaire1Type::class, $commentaire);
         $form->handleRequest($request);
-
         if ($form->isSubmitted() && $form->isValid()) {
             $entityManager->persist($commentaire);
             $entityManager->flush();

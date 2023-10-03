@@ -64,21 +64,22 @@
 		<h3 class="text-center mt-3 mb-3">
 			Catégories</h3>
 		{% for category in trick.categories %}
-
-
 			<div class="col d-flex justify-content-center align-items-center">
-				<span class="badge rounded-pill bg-primary">{{ category.name }}</span>
+				<span class="badge rounded-pill bg-primary ">{{ category.name }}</span>
 			</div>
-
 		{% else %}
 			<p>Pas de catégories trouvées</p>
 		{% endfor %}
+
 		<div class="row row-cols-1 row-cols-lg-3 row-cols-xl-4 g-4"></div>
 		<div class="row">
 			<div class="col">
 				<h1 class="text-center mt-3 mb-3">Commentaires</h1>
 				{% if app.user %}
-					{{ include('commentaire/_form.html.twig', {'button_label': 'Post'}) }}
+					{{ form_start(form) }}
+					{{ form_widget(form) }}
+					<button class="btn btn-info">{{ button_label|default('Enregistrer le commentaire') }}</button>
+					{{ form_end(form) }}
 				{% endif %}
 				{% for comment in trick.commentaires %}
 					<div class="card mb-3">
@@ -86,16 +87,16 @@
 							<h5 class="card-title">{{ comment.pseudoAuteur }}</h5>
 							<p class="card-text">{{ comment.contenu }}</p>
 							<p class="card-text">
-								<small class="text-muted">{{ comment.createdAt|date('Y-m-d H:i:s') }}</small>
+								<small class="text-muted">{{ comment.publishedAt|date('d-m-Y H:i:s') }}</small>
 							</p>
 						</div>
 					</div>
 				{% else %}
 					<p class="text-center ">Pas de commentaires trouvés</p>
 				{% endfor %}
-				<a href="{{ path('app_home') }}">back to list</a>
+				<a class="btn btn-secondary d-inline" href="{{ path('app_home') }}">back to list</a>
 				{% if app.user %}
-					<a href="{{ path('app_trick_edit', {'id': trick.id}) }}">edit</a>
+					<a href="{{ path('app_trick_edit', {'slug' : trick.slug }) }}">edit</a>
 					{% if app.user.roles == "ROLE_ADMIN" %}
 
 						{{ include('trick/_delete_form.html.twig') }}

@@ -18,7 +18,8 @@ class MediaFixtures extends Fixture
             ['snowboard-2.jpg', 'image'],
             ['snowboard-3.jpg', 'image'],
             ['snowboard-4.jpg', 'image'],
-            ['snowboard-5.jpg', 'image']
+            ['snowboard-5.jpg', 'image'],
+            
         ];
 
         foreach ($mediasData as $key => $mediaData) {

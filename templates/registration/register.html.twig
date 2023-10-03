@@ -1,29 +1,40 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Register{% endblock %}
+{% block title %}Register
+{% endblock %}
 
 {% block body %}
-    {% for flash_error in app.flashes('verify_email_error') %}
-        <div class="alert alert-danger" role="alert">{{ flash_error }}</div>
-    {% endfor %}
-    {% for flash_success in app.flashes('verify_email_success') %}
-        <div class="alert alert-success" role="alert">{{ flash_success }}</div>
-    {% endfor %}
-    <!-- mise en forme bootstrap de la page register -->
-    <div class="container">
-    
-    <h1>Inscription</h1>
-    {{ form_errors(registrationForm) }}
+	{% for flash_error in app.flashes('verify_email_error') %}
+		<div class="alert alert-danger" role="alert">{{ flash_error }}</div>
+	{% endfor %}
+	{% for flash_success in app.flashes('verify_email_success') %}
+		<div class="alert alert-success" role="alert">{{ flash_success }}</div>
+	{% endfor %}
+	<!-- mise en forme bootstrap de la page register -->
+	<div class="container-fluid">
+        <div class="container">
+        
 
-    {{ form_start(registrationForm) }}
-        {{ form_row(registrationForm.email) }}
-        {{ form_row(registrationForm.plainPassword, {
+		<div class="row">
+			<div class="card">
+				<div class="card-body">
+					<h1>Inscription</h1>
+					{{ form_errors(registrationForm) }}
+
+					{{ form_start(registrationForm) }}
+					{{ form_row(registrationForm.email) }}
+					{{ form_row(registrationForm.plainPassword, {
             label: 'Password'
         }) }}
-        {{ form_row(registrationForm.agreeTerms) }}
+					{{ form_row(registrationForm.agreeTerms) }}
 
-        <button type="submit" class="btn">Register</button>
-    {{ form_end(registrationForm) }}
-    </div>
+					<button type="submit" class="btn btn-info">S'enregistrer</button>
+                    <a href="{{ path('app_login') }}" class="btn btn-info">S'identifier</a>
+					{{ form_end(registrationForm) }}
+				</div>
+			</div>
+		</div>
+	</div>
+        </div>
 
 {% endblock %}

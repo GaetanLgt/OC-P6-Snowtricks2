@@ -60,6 +60,30 @@ class TrickFixtures extends Fixture
                 'description' => 'Saisie de l\'avant de la planche, avec la main avant, du côté de la carre frontside.',
                 'categorie' => ['Rotations désaxées'],
                 'media' =>  ['media_4', 'media_1', 'media_2'],
+            ],
+            [
+                'name' => 'Truck driver',
+                'description' => 'Saisie du carre avant et carre arrière avec chaque main (comme tenir un volant de voiture).',
+                'categorie' => ['Rotations désaxées'],
+                'media' => ['media_6', 'media_1', 'media_2'],
+            ],
+            [
+                'name' => 'Seat belt',
+                'description' => 'Saisie du carre frontside à l\'arrière avec la main avant.',
+                'categorie' => ['Old school', 'Rotations désaxées'],
+                'media' => ['media_3', 'media_4', 'media_5'],
+            ],
+            [
+                'name' => '360 désaxé',
+                'description' => 'Trois six désaxé.',
+                'categorie' => ['Rotations désaxées'],
+                'media' => ['media_6', 'media_1', 'media_2'],
+            ],
+            [
+                'name' => 'One foot',
+                'description' => 'Figure réalisée avec un seul pied fixé sur la planche.',
+                'categorie' => ['One foot tricks'],
+                'media' => ['media_3', 'media_4', 'media_5'],
             ]
         ];
 
