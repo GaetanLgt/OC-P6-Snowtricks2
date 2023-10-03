@@ -60,6 +60,7 @@ class TrickController extends AbstractController
     #[Route('/{slug}', name: 'app_trick_show', methods: ['GET','POST'])]
     public function show( EntityManagerInterface $entityManager, Request $request, string $slug): Response
     {
+        $slug = filter_var($slug, FILTER_SANITIZE_STRING);
         $trick = $entityManager->getRepository(Trick::class)->findOneBy(['slug' => $slug]);
         $commentaires = $trick->getCommentaires();
 
@@ -85,6 +86,7 @@ class TrickController extends AbstractController
     #[Route('/{slug}/edit', name: 'app_trick_edit', methods: ['GET', 'POST'])]
     public function edit(Request $request, EntityManagerInterface $entityManager, string $slug): Response
     {
+        $slug = filter_var($slug, FILTER_SANITIZE_STRING);
         $trick = $entityManager->getRepository(Trick::class)->findOneBy(['slug' => $slug]);
         $form = $this->createForm(TrickType::class, $trick);
         $form->handleRequest($request);
@@ -117,6 +119,7 @@ class TrickController extends AbstractController
     #[Route('/{slug}', name: 'app_trick_delete', methods: ['POST'])]
     public function delete(Request $request, EntityManagerInterface $entityManager, string $slug): Response
     {
+        $slug = filter_var($slug, FILTER_SANITIZE_STRING);
         $trick = $entityManager->getRepository(Trick::class)->findOneBy(['slug' => $slug]);
         if ($this->isCsrfTokenValid('delete'.$trick->getId(), $request->request->get('_token'))) {
             $entityManager->remove($trick);
