@@ -119,9 +119,15 @@ class TrickController extends AbstractController
     #[Route('/{slug}', name: 'app_trick_delete', methods: ['POST'])]
     public function delete(Request $request, EntityManagerInterface $entityManager, string $slug): Response
     {
-        $slug = filter_var($slug, FILTER_SANITIZE_STRING);
         $trick = $entityManager->getRepository(Trick::class)->findOneBy(['slug' => $slug]);
-        if ($this->isCsrfTokenValid('delete'.$trick->getId(), $request->request->get('_token'))) {
+        $slug = filter_var($slug, FILTER_SANITIZE_STRING);
+        if (!$trick) {
+            return new Response('Trick not found', Response::HTTP_NOT_FOUND);
+        }
+    
+        $csrfTokenId = 'delete' . $trick->getId();
+        $trick = $entityManager->getRepository(Trick::class)->findOneBy(['slug' => $slug]);
+        if ($this->isCsrfTokenValid($csrfTokenId, $request->request->get('_token'))) {
             $entityManager->remove($trick);
             $entityManager->flush();
         }
