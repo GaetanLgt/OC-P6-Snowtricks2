@@ -25,7 +25,7 @@ services:
       - '../src/Entity/'
       - '../src/Kernel.php'
 
-  App\Service\FileUploaderService:
+  App\Service\File\FileUploaderService:
     arguments:
       $uploadsDirectory: '%uploads_directory%'
 
