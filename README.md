@@ -37,7 +37,7 @@ Les URL ont été conçues pour une compréhension rapide et un bon référencem
 
 
 ```bash
-git clone https://github.com/GaetanLgt/OC-P6
+git clone https://github.com/GaetanLgt/OC-P6-Snowtricks2 
 ```
 2. Lancer Docker pour la BDD et le Mailer :
 ```bash
