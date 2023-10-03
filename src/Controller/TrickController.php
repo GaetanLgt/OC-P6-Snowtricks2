@@ -9,7 +9,7 @@ use App\Entity\Commentaire;
 use App\Form\CommentaireType;
 use App\Repository\TrickRepository;
 use Doctrine\ORM\EntityManagerInterface;
-use App\Service\File\FileUploaderService;
+use App\Service\FileUploaderService;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
