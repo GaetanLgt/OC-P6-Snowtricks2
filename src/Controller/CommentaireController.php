@@ -71,7 +71,8 @@ class CommentaireController extends AbstractController
     #[Route('/{id}', name: 'app_commentaire_delete', methods: ['POST'])]
     public function delete(Request $request, Commentaire $commentaire, EntityManagerInterface $entityManager): Response
     {
-        if ($this->isCsrfTokenValid('delete'.$commentaire->getId(), $request->request->get('_token'))) {
+        $commentaireId = (int) $commentaire->getId();
+        if ($this->isCsrfTokenValid('delete'.$commentaireId, $request->request->get('_token'))) {
             $entityManager->remove($commentaire);
             $entityManager->flush();
         }
